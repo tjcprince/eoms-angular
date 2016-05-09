@@ -1,0 +1,28 @@
+
+<div>
+	<div class="row">
+		<div class="col-md-12">
+			<a ui-sref="addbook" class="btn btn-primary">新增书籍</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-striped">
+				<tr>
+					<td>序号</td>
+					<td>名字</td>
+					<td>作者</td>
+					<td>时间</td>
+					<td>价格</td>
+				</tr>
+				<tr ng-repeat="book in vm.books">
+					<td>{{book.bookId}}</td>
+					<td>{{book.name}}</td>
+					<td>{{book.author}}</td>
+					<td>{{book.pubTime}}</td>
+					<td>{{book.price}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

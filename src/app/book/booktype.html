@@ -1,0 +1,19 @@
+<div class="list-group">
+	<a ui-sref="home.main.booklist.bookgrid({bookTypeId:0})" class="list-group-item active">种类</a>
+	<a ui-sref="home.main.booklist.bookgrid({bookTypeId:1})" class="list-group-item">种类1</a>
+	<a ui-sref="home.main.booklist.bookgrid({bookTypeId:2})" class="list-group-item">种类2</a>
+	<a ui-sref="home.main.booklist.bookgrid({bookTypeId:3})" class="list-group-item">种类3</a>
+	<a ui-sref="home.main.booklist.bookgrid({bookTypeId:4})" class="list-group-item">种类4</a>
+</div>
+
+<!-- Button to trigger a default aside with a scope as an object {title:'', content:'', etc.} -->
+<button type="button" class="btn btn-lg btn-primary" bs-aside="aside">Click to toggle aside
+  <br>
+  <small>(using an object)</small>
+</button>
+
+<!-- You can use a custom html template with the `data-template` attr -->
+<button type="button" class="btn btn-lg btn-danger" data-template-url="app/commons/demo.html" data-placement="left" data-animation="am-slide-left" bs-aside="aside" data-container="body">Custom aside
+  <br>
+  <small>(using data-template)</small>
+</button>

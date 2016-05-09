@@ -1,0 +1,17 @@
+.main-left{
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    float: left;
+    margin: 0;
+    background:whitesmoke;
+    border:1px solid lightgray;
+    border-radius:0px;
+    overflow:auto;
+}
+.main-right{
+    margin-left: 200px;
+    position: relative;
+    padding-top:10px;
+}
+

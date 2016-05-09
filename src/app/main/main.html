@@ -1,0 +1,11 @@
+<div>
+  <div class="main-left">
+  	<div ng-class="expression">{{user.userName}}</div>
+    <abn-tree icon-leaf="icon-file"
+    icon-expand="fa fa-caret-right" icon-collapse="fa fa-caret-down" tree-data="vm.my_data" tree-control="my_tree" on-select="my_tree_handler(branch)" expand-level="1" ></abn-tree>
+
+  </div>
+  <div class="main-right">
+    <div ui-view></div>
+  </div>
+</div>

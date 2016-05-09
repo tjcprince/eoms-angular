@@ -1,0 +1,19 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header" ng-show="title">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title" ng-bind-html="title"></h4>
+      </div>
+      <div class="aside-body" ng-show="content">
+{{vm.select}}
+         <abn-tree icon-leaf="icon-file"
+    icon-expand="fa fa-caret-right" icon-collapse="fa fa-caret-down" tree-data="vm.my_data" tree-control="my_tree" on-select="my_tree_handler(branch)"  expand-level="2" initial-selection = "{{vm.select}}"></abn-tree>
+
+
+      </div>
+      <div class="aside-footer">
+      </div>
+    </div>
+  </div>
+</div>

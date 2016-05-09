@@ -1,0 +1,24 @@
+
+<div class="container">
+	<div bs-active-pane="" bs-tabs>
+		<div  data-title="待办工单" name="待办工单"  bs-pane>
+			<table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+				<tr ng-repeat="user in $data">
+					<td title="'姓名'" filter="{ name: 'text'}" sortable="'name'">
+						<a data-animation="am-fade-and-slide-top" data-template-url="app/commons/demo1.html" bs-modal="vm.modal" href="#">{{user.name}}</a>
+					</td>
+					<td title="'年龄'" filter="{ age: 'number'}" sortable="'age'">{{user.age}}</td>
+					<td title="'性别'" filter="{ sex: 'text'}" sortable="'sex'">{{user.sex}}</td>
+					<td title="'手机'" filter="{ phone: 'number'}" sortable="'phone'">{{user.phone}}</td>
+				</tr>
+			</table>
+		</div>
+		<div  data-title="处理工单" name="showListsenddone"   bs-pane>
+			 aaaa
+		</div>
+		<div  data-title="工单统计" name="sheetCount"   bs-pane>cccc</div>
+		<div  data-title="树图" name="angularUiTree"   bs-pane>
+			<eoms-tree></eoms-tree>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,61 @@
+<div>
+<script type="text/ng-template" id="myModalContent.html">
+		        <div class="modal-header">
+		            <h3 class="modal-title">I'm a modal!</h3>
+		        </div>
+		        <div class="modal-body">
+		            <ul>
+		                <li ng-repeat="item in vm.items">
+		                    <a href="#" ng-click="$event.preventDefault(); vm.selected.item = item">{{ item }}</a>
+		                </li>
+		            </ul>
+		            Selected: <b>{{ vm.selected.item }}</b>
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+		            <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+		        </div>
+		    </script>
+<script type="text/ng-template" id="nodes_renderer.html">
+				  <div ui-tree-handle class="tree-node tree-node-content">
+				    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="vm.toggle(this)"><span
+				        class="glyphicon"
+				        ng-class="{
+				          'glyphicon-chevron-right': collapsed,
+				          'glyphicon-chevron-down': !collapsed
+				        }"></span></a>
+				    {{node.title}}
+				    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="vm.remove(this)"><span
+				        class="glyphicon glyphicon-remove"></span></a>
+				    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="vm.open()" style="margin-right: 8px;"><span
+				        class="glyphicon glyphicon-plus"></span></a>
+				  </div>
+				  <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+				    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+				  </ol>
+			</script>
+
+<div class="row" ng-controller="AngularUiTreeController">
+	<div class="col-sm-12">
+		<h3>Basic Example</h3>
+
+		<button ng-click="vm.expandAll()">Expand all</button>
+		<button ng-click="vm.collapseAll()">Collapse all</button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div ui-tree id="tree-root">
+			<ol ui-tree-nodes ng-model="vm.data">
+				<li ng-repeat="node in vm.data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="info">{{info}}</div>
+		<pre class="code">{{ vm.data | json }}</pre>
+	</div>
+</div>
+</div>
