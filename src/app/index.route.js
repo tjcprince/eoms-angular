@@ -39,6 +39,19 @@
           }
         }
       })
+      .state("home.eomsindex", {
+        url: "/eomsindex",
+        resolve: {
+          loginRequired: loginRequired
+        },
+        views: {
+          "": {
+            templateUrl: "app/eomsindex/eomsindex.html",
+            controller: 'EomsindexController',
+            controllerAs: 'vm'
+          }
+        }
+      })
       .state("home.ngtable", {
         url: "/ngtable/{homeid:[0-9]{1,4}}",
         resolve: {

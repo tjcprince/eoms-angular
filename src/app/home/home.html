@@ -84,82 +84,23 @@
         <!-- /.navbar-collapse --> 
     </nav>
    <div class="inToOut_Animation" ui-view>
+   <!--
    <div ng-controller="MessengerController as messengerCtrl">
     <h2>WebSocket Test</h2>
-    Connection: {{ Messages.status() }}
-    <form ng-submit="submit(new_message)">
-      <input type="text" ng-model="username">
+    Connection: {{ messengerCtrl.Messages.status() }}
+    <form ng-submit="messengerCtrl.submit(new_message)">
+      <input type="text" ng-model="messengerCtrl.username">
       <input type="text" ng-model="new_message" autofocus required>
       <button type="submit">Send Message</button>
     </form>
-    <div ng-repeat="message in Messages.collection | orderBy:'-timeStamp' track by $index">
+    <div ng-repeat="message in messengerCtrl.Messages.collection | orderBy:'-timeStamp' track by $index">
       <b>{{ message.username | capitalize }}</b>: <small>{{ message.timeStamp | date:'medium' }}</small>
       <br>
         {{ message.content }}
       <br>
       <br>
     </div>
-
-    <div id="output">
-
-    </div>
-
-
+    -->
   </div>
 
-  <script language="javascript" type="text/javascript">
-    // really bad native api example from websocket.org
-
-    var wsUri = "ws://localhost:8080/eoms2016/websck";
-
-    var output;
-
-    function init() {
-      output = document.getElementById("output");
-      testWebSocket();
-    }
-
-    function onOpen(evt) {
-      writeToScreen("CONNECTED");
-      doSend("WebSocket rocks");
-    }
-    function onClose(evt) {
-      writeToScreen("DISCONNECTED");
-    }
-    function onMessage(evt) {
-      writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
-      websocket.close();
-    }
-    function onError(evt) {
-      writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-    }
-    function doSend(message) {
-      writeToScreen("SENT: " + message);
-      websocket.send(message);
-    }
-    function writeToScreen(message) {
-      var pre = document.createElement("p");
-      pre.style.wordWrap = "break-word";
-      pre.innerHTML = message;
-      (output || document.getElementById('output')).appendChild(pre);
-    }
-
-    function testWebSocket() {
-      websocket = new WebSocket(wsUri);
-      websocket.onopen = function(evt) {
-        onOpen(evt)
-      };
-      websocket.onclose = function(evt) {
-        onClose(evt)
-      };
-      websocket.onmessage = function(evt) {
-        onMessage(evt)
-      };
-      websocket.onerror = function(evt) {
-        onError(evt)
-      };
-    }
-
-    window.addEventListener("load", init, false);
-  </script>
    </div>

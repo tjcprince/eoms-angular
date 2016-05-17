@@ -1,0 +1,12 @@
+<div>
+	<table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
+				<tr ng-repeat="user in $data">
+					<td title="'编号'" filter="{id: 'text'}" sortable="'id'">
+						<a data-animation="am-fade-and-slide-top" data-template-url="app/commons/demo1.html" bs-modal="vm.modal" href="#">{{user.id}}</a>
+					</td>
+					<td title="'创建人'" filter="{ createUser: 'text'}" sortable="'createUser'">{{user.createUser}}</td>
+					<td title="'标题'" filter="{ title: 'text'}" sortable="'title'">{{user.title}}</td>
+					<td title="'内容'" filter="{ content: 'text'}" sortable="'content'">{{user.content}}</td>
+				</tr>
+	</table>
+</div>

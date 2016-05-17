@@ -3,90 +3,13 @@
 
   angular
     .module('eomsAngular')
-    .controller('HomeController', HomeController).factory('Messages', function($websocket) {
-  var ws = $websocket('ws://localhost:8080/eoms2016/websck');
-  var collection = [];
-
-  ws.onMessage(function(event) {
-    console.log('message: ', event);
-    var res;
-    try {
-      res = JSON.parse(event.data);
-    } catch(e) {
-      res = {'username': 'anonymous', 'message': event.data};
-    }
-
-    collection.push({
-      username: res.username,
-      content: res.message,
-      timeStamp: event.timeStamp
-    });
-  });
-
-  ws.onError(function(event) {
-    console.log('connection Error', event);
-  });
-
-  ws.onClose(function(event) {
-    console.log('connection closed', event);
-  });
-
-  ws.onOpen(function() {
-    console.log('connection open');
-    ws.send('Hello World');
-    ws.send('again');
-    ws.send('and again');
-  });
-  // setTimeout(function() {
-  //   ws.close();
-  // }, 500)
-
-  return {
-    collection: collection,
-    status: function() {
-      return ws.readyState;
-    },
-    send: function(message) {
-      if (angular.isString(message)) {
-        ws.send(message);
-      }
-      else if (angular.isObject(message)) {
-        ws.send(JSON.stringify(message));
-      }
-    }
-
-  };
-})
-.controller('MessengerController', function($scope, Messages) {
-  $scope.username = 'anonymous';
-
-  $scope.Messages = Messages;
-
-  $scope.submit = function(new_message) {
-    if (!new_message) { return; }
-    Messages.send({
-      username: $scope.username,
-      message: new_message
-    });
-    $scope.new_message = '';
-  };
-
-
-})
-.filter('capitalize', function() {
-  function capWord(txt) {
-    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-  }
-  return function(input, isEveryWord) {
-     return (!input) ? '' : (!isEveryWord) ? capWord(input) : input.replace(/([^\W_]+[^\s-]*) */g, capWord);
-  };
-});
-
+    .controller('HomeController', HomeController);
   /** @ngInject */
   function HomeController($log, $state, UserRestangularFactory, $http) {
     var vm = this;
 
     vm.test = test;
+
     function test() {
       $http({
         method: 'GET',
@@ -141,17 +64,16 @@
       subtree: [{
         name: "新业务试点工单",
         link: "#"
-      },{
+      }, {
         name: "新业务正式实施工单",
         link: "#"
-      },{
+      }, {
         name: "网络数据管理工单",
         link: "#"
-      },{
+      }, {
         name: "电路调度工单",
         link: "#"
-      }
-      ]
+      }]
     }, {
       name: "divider",
       link: "#"
@@ -166,7 +88,7 @@
       name: "任务类流程",
       link: "#"
     }];
-vm.navtree1 = [{
+    vm.navtree1 = [{
       name: "网元管理",
       link: "＃"
     }, {
@@ -220,8 +142,8 @@ vm.navtree1 = [{
     }, {
       name: "执行",
       link: "#"
-    } ];
-vm.navtree2 = [{
+    }];
+    vm.navtree2 = [{
       name: "全屏切换",
       link: "home.fullpage({homeid:0})"
     }, {
@@ -233,7 +155,7 @@ vm.navtree2 = [{
     }, {
       name: "第四屏",
       link: "#"
-    } ];
+    }];
 
     vm.aside = {
       "title": "标题",
@@ -243,40 +165,40 @@ vm.navtree2 = [{
     // $state.go("home.fullpage", {
     //   'homeid': 0
     // });
-//abn-tree:begin
-    vm.select="";
+    //abn-tree:begin
+    vm.select = "";
     var _selected, treedata_avm;
     _selected = function(branch) {
       $state.go("home.ngtable", {
         'homeid': branch.mainid
       });
-      vm.select=branch.label;
+      vm.select = branch.label;
     };
     treedata_avm = [{
       label: '菜单1',
       children: [{
-        mainid:1,
+        mainid: 1,
         label: '菜单1-1',
         data: {
           description: "man's best friend"
         },
         onSelect: _selected
       }, {
-        mainid:2,
+        mainid: 2,
         label: '菜单1-2',
         data: {
           description: "Felis catus"
         },
         onSelect: _selected
       }, {
-        mainid:3,
+        mainid: 3,
         label: '菜单1-3',
         data: {
           description: "hungry, hungry"
         },
         onSelect: _selected
       }, {
-        mainid:4,
+        mainid: 4,
         label: '菜单1-4',
         children: ['菜单1-4-1', '菜单1-4-2', '菜单1-4-3']
       }]
@@ -296,7 +218,7 @@ vm.navtree2 = [{
         children: [{
           label: 'Granny Smith',
           onSelect: _selected,
-          mainid:5
+          mainid: 5
         }, {
           label: 'Red Delicous',
           onSelect: _selected
@@ -326,6 +248,7 @@ vm.navtree2 = [{
     }];
 
     vm.my_data = treedata_avm;
-  //abn-tree:end
+    //abn-tree:end
+    $state.go("home.eomsindex");
   }
 })();

@@ -73,7 +73,7 @@
   }
   /** @ngInject */
   function restangularConfig(RestangularProvider) {
-    RestangularProvider.setBaseUrl('app/data');
+    RestangularProvider.setBaseUrl('http://localhost:8080/eoms2016');
     //RestangularProvider.setRequestSuffix('.json');
     //RestangularProvider.setJsonp(true);
     // RestangularProvider.setDefaultRequestParams('jsonp', {
