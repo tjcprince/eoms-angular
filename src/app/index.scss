@@ -16,10 +16,14 @@ html,body{
   // height:100%;  
   // margin:0px;
   // padding: 0px;
-} 
+}   
 body { padding-top: 70px; }
 .indexDiv{
 	// height: 100%;
+}
+//去掉所有蓝色边框
+*{
+    outline:none;
 }
 .browsehappy {
   margin: 0.2em 0;

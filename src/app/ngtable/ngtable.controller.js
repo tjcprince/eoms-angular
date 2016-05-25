@@ -7,6 +7,7 @@
 	/** @ngInject */
 	function NgtableController(NgTableParams) {
 		var vm = this;
+		
 		var dataset = [{
 			name: '小米',
 			age: 21,

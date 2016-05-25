@@ -6,7 +6,7 @@
 		.controller('LoginController', LoginController);
 
 	/** @ngInject */
-	function LoginController($log, LoginService, $state, $auth, toastr, SatellizerShared, SatellizerConfig, SatellizerStorage,ngProgressFactory) {
+	function LoginController($log, LoginService, $state, $auth, toastr, SatellizerShared, SatellizerConfig, SatellizerStorage,ngProgressFactory,$window) {
 		var vm = this;
 		vm.login = login;
 		vm.authenticate = authenticate;
@@ -57,13 +57,18 @@
 					var data = response.data;
 					if (data.status == '401') {
 						toastr.warning(data.entity);
+						vm.progressbar.complete();
 					} else {
 						toastr.success('You have successfully signed in!');
 						$state.go("home");
 						vm.progressbar.complete();
+						//清除首页缓存
+						var wsCache=new $window.WebStorageCache();
+						wsCache.delete("indexdata");
 					}
 				})
 				.catch(function(error) {
+					vm.progressbar.complete();
 					toastr.error(error.data.message, error.status);
 				});
 		}

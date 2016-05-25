@@ -19,9 +19,7 @@
       })
       .state('signup', {
         url: '/signup',
-        resolve: {
-          loginRequired: loginRequired
-        },
+       
         templateUrl: 'app/login/signup.html',
         controller: 'SignupController',
         controllerAs: 'vm'

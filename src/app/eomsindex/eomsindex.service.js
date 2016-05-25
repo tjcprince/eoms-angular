@@ -6,7 +6,7 @@
 		.service('EomsindexService', EomsindexService);
 
 	/** @ngInject*/
-	function EomsindexService(Restangular, $log) {
+	function EomsindexService(Restangular) {
 
 		var service = {
 			querySheet: querySheet
@@ -15,7 +15,7 @@
 		return service;
 
 		function querySheet() {
-			 return Restangular.one('sheetController', 'querySheet').getList();
+			return Restangular.one('sheetController', 'querySheet').getList();
 		}
 
 	}
