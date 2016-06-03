@@ -51,7 +51,7 @@
         }
       })
       .state("home.ngtable", {
-        url: "/ngtable/{homeid:[0-9]{1,4}}",
+        url: "/ngtable/{homeid}",
         resolve: {
           loginRequired: loginRequired
         },

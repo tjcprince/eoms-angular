@@ -5,12 +5,43 @@
 li:hover >.dropdown-menu {
   display: block;
 }
-.homeDiv{
-	// height: 100%;
-	//padding-top: 50px;
-	// left:0;
-	// right:0;
-	// top: 0;
-	// bottom:0;
-	// position: fixed;
+/**
+ * 去掉bootstrap默认的 导航菜单的悬浮
+ * 
+ */
+.navbar-nav{
+	float:none;
+}
+.home_navbar{
+	background-color: #1488FE;
+	.navbar-toggle{
+		border-color:#333;
+		.icon-bar {
+    		background-color: #fff;
+		}
+	}
+}
+.home_a{
+	color:#ffffff;
+}
+.home_nav{
+	margin:10px auto;
+	li{
+		margin-right: 5px;
+		a{
+			color:#ffffff;
+			line-height: 20px;
+			border-radius: 4px;
+			padding:5px 10px
+		}
+
+		a:hover,a:focus{
+			color:rgb(0, 138, 251);
+			background-color: #ffffff;
+		}
+	}
+	li.active a,li.active a:hover,li.active a:focus{
+		color:rgb(0, 138, 251);
+		background-color: #ffffff;
+	}
 }

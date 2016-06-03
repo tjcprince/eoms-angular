@@ -228,6 +228,20 @@
             root_branch = _ref[_i];
             _results.push(add_branch_to_list(1, root_branch, true));
           }
+
+
+          //数据变化后，重新默认选中 begin
+          if (!tree.get_selected_branch()) {//判断是否是刚打开侧边树
+            for_each_branch(function(b) {
+              //console.info(attrs.initialSelection);
+              if (b.CODE === attrs.initialSelection) {
+                return $timeout(function() {
+                  return select_branch(b);
+                });
+              }
+            });
+          }
+          //数据变化后，重新默认选中 end
           return _results;
         };
         scope.$watch('treeData', on_treeData_change, true);
@@ -325,6 +339,16 @@
                 b.expanded = false;
                 return b;
               }
+            };
+            //设置选中的哪个节点    根据code判断
+            tree.select_branch_set = function(code) {
+              for_each_branch(function(b) {
+                if (b.CODE === code) {
+                  return $timeout(function() {
+                    return select_branch(b);
+                  });
+                }
+              });
             };
             tree.get_siblings = function(b) {
               var p, siblings;

@@ -6,9 +6,24 @@
         <h4 class="aside-title" ng-bind-html="title"></h4>
       </div>
       <div class="aside-body" ng-show="content">
-{{vm.select}}
+ <button ng-click="vm.my_tree.select_branch_set(vm.selectCode)" class="btn btn-default btn-sm">选中</button>
+                <button ng-click="vm.my_tree.select_first_branch()" class="btn btn-default btn-sm">First Branch</button>
+                <br>
+                <button ng-click="vm.my_tree.select_next_sibling()" class="btn btn-default btn-sm">Next Sibling</button>
+                <button ng-click="vm.my_tree.select_prev_sibling()" class="btn btn-default btn-sm">Prev Sibling</button>
+                <br>
+                <button ng-click="vm.my_tree.select_next_branch()" class="btn btn-default btn-sm">Next Branch</button>
+                <button ng-click="vm.my_tree.select_prev_branch()" class="btn btn-default btn-sm">Prev Branch</button>
+                <br>
+                <button ng-click="vm.my_tree.select_parent_branch()" class="btn btn-default btn-sm">Parent</button>
+                <hr>
+                <button ng-click="vm.my_tree.expand_branch()" class="btn btn-default btn-sm">Expand</button>
+                <button ng-click="vm.my_tree.collapse_branch()" class="btn btn-default btn-sm">Collapse</button>
+                <button ng-click="vm.my_tree.expand_all()" class="btn btn-default btn-sm">Expand All</button>
+                <button ng-click="vm.my_tree.collapse_all()" class="btn btn-default btn-sm">Collapse All</button>
+                <hr>
          <abn-tree icon-leaf="icon-file"
-    icon-expand="fa fa-caret-right" icon-collapse="fa fa-caret-down" tree-data="vm.my_data" tree-control="my_tree" on-select="my_tree_handler(branch)"  expand-level="2" initial-selection = "{{vm.select}}"></abn-tree>
+    icon-expand="fa fa-caret-right" icon-collapse="fa fa-caret-down" tree-data="vm.my_data" tree-control="vm.my_tree" on-select="vm.my_tree_handler(branch)"  expand-level="2" initial-selection = "{{vm.selectCode}}"></abn-tree>
 
 
       </div>

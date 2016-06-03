@@ -20,7 +20,6 @@
 				wsCache.set('indexdata', data);
 			});
 		} else {
-			$log.info("aaa");
 			vm.tableParams = new NgTableParams({
 				count: 5
 			}, {
