@@ -1,10 +1,4 @@
-<div>
-<input size="16" type="text"  readonly class="form_datetime">
- 
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker({language: 'zh-CN',autoclose: true,
-                todayHighlight: true,todayBtn:true,todayHighlight:true,keyboardNavigation:true,minuteStep:5,format: 'yyyy-mm-dd hh:ii',minView:2});
-</script> 
+<div class="container-fluid">
 	<table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped" show-filter="true">
 				<tr ng-repeat="user in $data">
 					<td title="'编号'" filter="{id: 'text'}" sortable="'id'">

@@ -50,6 +50,19 @@
           }
         }
       })
+      .state("home.commontaskList", {
+        url: "/commontaskList",
+        resolve: {
+          loginRequired: loginRequired
+        },
+        views: {
+          "": {
+            templateUrl: "app/sheet/commontask/commontaskList.html",
+            controller: 'CommontaskListController',
+            controllerAs: 'vm'
+          }
+        }
+      })
       .state("home.ngtable", {
         url: "/ngtable/{homeid}",
         resolve: {

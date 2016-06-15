@@ -83,6 +83,9 @@
 		// 	$log.info(data[j].id);
 		// }
 		// wsCache.set("indexdata", data);
-		
+		vm.modal = {
+			"title": "Title",
+			"content": "Hello Modal<br />This is a multiline message!"
+		};
 	}
 })();

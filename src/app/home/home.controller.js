@@ -36,8 +36,8 @@
         link: function(scope, element) {
           if (scope.$last === true) {
             $timeout(function() {
-              var left=element[0].offsetLeft;
-              if (left!=15) {
+              var left = element[0].offsetLeft;
+              if (left != 15) {
                 var top = element[0].offsetTop;
                 angular.element("body").css({
                   "padding-top": 70 + top - ((top - 10) / 30 + 1) * 10 + "px"
@@ -54,24 +54,22 @@
   function HomeController($log, $state, $window, UserRestangularFactory, $http, HomeService, $aside, $scope) {
     var vm = this;
 
-    // var w = angular.element($window);
-    // $scope.$watch(
-    //   function () {
-    //     console.info("aaaa");
-    //     return $window.innerWidth;
-    //   },
-    //   function (value) {
-    //      console.info("bbbbb");
-    //     $scope.windowWidth = value;
-    //   },
-    //   true
-    // );
+    // //动画列表  目前只能使用inAnimations,normalAnimations
+    // vm.animateArray = {
+    //     "inAnimations": ["bounceIn", "bounceInDown", "bounceInLeft", "bounceInRight", "bounceInUp", "fadeIn", "fadeInDown", "fadeInDownBig", "fadeInLeft", "fadeInLeftBig", "fadeInRight", "fadeInRightBig", "fadeInUp", "fadeInUpBig", "flipInX", "flipInY", "lightSpeedIn", "rotateIn", "rotateInDownLeft", "rotateInDownRight", "rotateInUpLeft", "rotateInUpRight", "rollIn", "zoomIn", "zoomInDown", "zoomInLeft", "zoomInRight", "zoomInUp", "slideInDown", "slideInLeft", "slideInRight", "slideInUp"],
+    //     "outAnimations": ["bounceOut", "bounceOutDown", "bounceOutLeft", "bounceOutRight", "bounceOutUp", "fadeOut", "fadeOutDown", "fadeOutDownBig", "fadeOutLeft", "fadeOutLeftBig", "fadeOutRight", "fadeOutRightBig", "fadeOutUp", "fadeOutUpBig", "flipOutX", "flipOutY", "lightSpeedOut", "rotateOut", "rotateOutDownLeft", "rotateOutDownRight", "rotateOutUpLeft", "rotateOutUpRight", "rollOut", "zoomOut", "zoomOutDown", "zoomOutLeft", "zoomOutRight", "zoomOutUp", "slideOutDown", "slideOutLeft", "slideOutRight", "slideOutUp"],
+    //     "normalAnimations": ["bounce", "flash", "pulse", "rubberBand", "shake", "swing", "tada", "wobble", "jello", "flip", "hinge"]
+    //   }
+    //   //设置默认动画
+    // vm.animateClass = "bounceIn";
+    // //页面动态动画的函数
+    // $scope.getClass = function() {
+    //   return vm.animateClass;
+    // };
 
-    // w.bind('resize', function(){
-    //   $scope.$apply();
-    // });
     //查询首页菜单--begin
     HomeService.queryMenu().then(function(data) {
+      console.info(data);
       vm.menuList = data;
       // vm.my_data = []; //初始化菜单树
     });
@@ -80,37 +78,55 @@
     vm.my_tree = {};
     vm.selectCode = "";
     //创建侧边树
-    vm.show = function() {
-        var myOtherAside = $aside({
-          title: 'My Title',
-          content: 'My Content',
-          scope: $scope,
-          templateUrl: 'app/commons/navTree.html',
-          show: false
-        });
-        myOtherAside.$promise.then(function() {
-          myOtherAside.show();
-        })
-      }
-      //侧边树点击节点 触发的函数
+    var myOtherAside = $aside({
+      title: 'My Title',
+      content: 'My Content',
+      scope: $scope,
+      templateUrl: 'app/commons/navTree.html',
+      show: false
+    });
+
+    //侧边树点击节点 触发的函数
     vm.my_tree_handler = function(branch) {
         if (branch.ISLEAF == 1) {
+          // //设置页面随机动画 begin
+          // var arr = vm.animateArray['inAnimations'];
+          // var n = Math.floor(Math.random() * arr.length + 1) - 1;
+          // vm.animateClass = arr[n];
+          // //设置页面随机动画 end
+          //跳转页面
           $state.go("home.ngtable", {
             'homeid': branch.CODE
           });
+          if (vm.selectCode != branch.CODE) {
+            myOtherAside.$promise.then(function() { //关闭侧边页面、
+              myOtherAside.hide();
+            })
+          }
+
+          //设置选中的节点CODE
           vm.selectCode = branch.CODE;
         }
       }
       //首页菜单选中
-    vm.isCurrent = function(index, code) {
+    vm.isCurrent = function(index, data) {
         vm.activerow = index;
-        vm.my_data = []; //初始化侧边菜单数据
-        vm.show(); //打开侧边页面、
-        //获取选中的菜单的侧边树的数据
-        HomeService.menuByCode(code).then(function(data) {
-          vm.my_data = data;
-        });
-        vm.isCollapsed=false;
+        if (data.ISAPP == '0') { //打开侧边树
+          vm.my_data = []; //初始化侧边菜单数据
+          myOtherAside.$promise.then(function() {
+              myOtherAside.show();
+            })
+            //获取选中的菜单的侧边树的数据
+          HomeService.menuByCode(data.CODE).then(function(data) {
+            vm.my_data = data;
+          });
+        } else { //跳转相应的页面
+          if (data.URL == "commontask") { //任务工单
+            $state.go("home.commontaskList");
+          }
+        }
+
+        vm.isCollapsed = false;
       }
       //查询首页菜单--end
 

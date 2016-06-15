@@ -32,7 +32,8 @@
     "angular-websocket": "^1.1.0",
     "restangular": "^1.5.2",
     "bootstrap-additions": "^0.3.1",
-    "smalot-bootstrap-datetimepicker": "https://github.com/smalot/bootstrap-datetimepicker.git#^2.3.10"
+    "smalot-bootstrap-datetimepicker": "https://github.com/smalot/bootstrap-datetimepicker.git#^2.3.10",
+    "angular-ui-router-anim-in-out": "^1.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

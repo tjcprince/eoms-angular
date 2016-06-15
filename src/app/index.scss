@@ -24,6 +24,10 @@ body { padding-top: 70px; }
 *{
     outline:none;
 }
+//表单验证不通过样式
+.help-block{
+  color:red;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

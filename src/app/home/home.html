@@ -13,14 +13,14 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div  class="collapse navbar-collapse" uib-collapse="!vm.isCollapsed"  resize>
     <ul class="nav navbar-nav home_nav ">
-      <li  ng-class="{active:$index==vm.activerow}"  ng-click="vm.isCurrent($index,data.CODE)" ng-repeat="data in vm.menuList" on-finish-render-filters>
+      <li  ng-class="{active:$index==vm.activerow}"  ng-click="vm.isCurrent($index,data)" ng-repeat="data in vm.menuList" on-finish-render-filters>
         <a href="#" style="cursor:pointer">{{data.NAME}}</a>
       </li>
     </ul>
   </div>
   <!-- /.navbar-collapse -->
 </nav>
-<div class="inToOut_Animation" ui-view>
+<div  class="home_div anim-in-out anim-slide-left " data-anim-speed="500" ui-view>
   <!--
    <div ng-controller="MessengerController as messengerCtrl">
   <h2>WebSocket Test</h2>
