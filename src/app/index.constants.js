@@ -5,6 +5,7 @@
   angular
     .module('eomsAngular')
     .constant('malarkey', malarkey)
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('eomsIp', 'localhost');
 
 })();

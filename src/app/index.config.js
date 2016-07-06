@@ -7,7 +7,9 @@
     .config(httpProviderConfig)
     .factory('httpInterceptorFactory', httpInterceptorFactory)
     .config(httpInterceptorConfig)
-    .config(restangularConfig);
+    .config(restangularConfig)
+    .config(ivhTreeviewOptionsConfig)
+    ;
 
   /**
    * 设置$httpProvider 访问后台缺省配置(解决spring接收不到参数问题)
@@ -72,8 +74,8 @@
     toastrConfig.progressBar = true;
   }
   /** @ngInject */
-  function restangularConfig(RestangularProvider) {
-    RestangularProvider.setBaseUrl('http://localhost:8080/eoms2016');
+  function restangularConfig(RestangularProvider,eomsIp) {
+    RestangularProvider.setBaseUrl('http://'+eomsIp+':8080/eoms2016');
     //RestangularProvider.setRequestSuffix('.json');
     //RestangularProvider.setJsonp(true);
     // RestangularProvider.setDefaultRequestParams('jsonp', {
@@ -123,5 +125,23 @@
       }
     }
     return interceptor;
+  }
+  /** @ngInject */
+  function ivhTreeviewOptionsConfig(ivhTreeviewOptionsProvider){
+    ivhTreeviewOptionsProvider.set({
+    idAttribute: 'id',
+    labelAttribute: 'label',
+    childrenAttribute: 'children',
+    selectedAttribute: 'selected',
+    useCheckboxes: false,
+    expandToDepth: 0,
+    indeterminateAttribute: '__ivhTreeviewIndeterminate',
+    expandedAttribute: '__ivhTreeviewExpanded',
+    defaultSelectedState: false,
+    validate: true,
+    twistieExpandedTpl: '<i class="fa fa-folder-open-o" aria-hidden="true"></i>',
+    twistieCollapsedTpl: '<i class="fa fa-folder-o" aria-hidden="true"></i>',
+    twistieLeafTpl: '<i class="fa fa-leaf" aria-hidden="true"></i>'
+  });
   }
 })();

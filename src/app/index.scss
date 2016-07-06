@@ -24,9 +24,45 @@ body { padding-top: 70px; }
 *{
     outline:none;
 }
+//eoms弹出层的样式  angular ui bootstrap 的弹出层modal
+.modal-eoms{
+  width: 96%;
+  
+}
 //表单验证不通过样式
 .help-block{
   color:red;
+}
+//下拉列表默认样式
+.eoms-select{
+  background-color: rgb(31, 177, 138);
+  color:#fff;
+}
+//重新设置表单 col的偏移量
+.eoms-form-col-left{
+  padding-left: 0px;
+}
+//重新设置表单 col的偏移量
+.eoms-form-col-left-right{
+  padding-left: 30px;
+  padding-right:30px;
+}
+.eoms-file-btn{
+  background-color:rgb(252, 168, 50);
+  color:#fff;
+  &:focus{
+    background-color:rgb(252, 168, 50);
+    color:#fff;
+  }
+  &:hover{
+    background-color:rgb(252, 168, 50);
+    color:#fff;
+  }
+  &:active{
+    background-color:rgb(252, 168, 50);
+    color:#fff;
+  }
+
 }
 .browsehappy {
   margin: 0.2em 0;

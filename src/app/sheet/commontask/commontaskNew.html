@@ -1,19 +1,19 @@
 <div class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" style="width: 98%;margin: 30px,150px">
+  <div class="modal-dialog" style="width: 98%;">
     <div class="modal-content">
       <div class="modal-header" >
         <button type="button" class="close" ng-click="$hide()">&times;</button>
         <h4 class="modal-title">新建工单</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="max-height: 420px;overflow-y: auto;">
         <div class="container-fluid">
           <form class="form-horizontal"  role="form" name="commontaskNewForm" novalidate="novalidate">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6 eoms-form-col-left">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.title.$valid,'has-error':commontaskNewForm.title.$dirty&&!commontaskNewForm.title.$valid}">
-                  <label for="tilte" class="col-md-2 control-label">主题*</label>
-                  <div class="col-md-10">
-                    <input type="text" class="form-control" id="title" name="title" ng-model="commontaskMain.title" placeholder="主题" required>
+                  <label for="tilte" class="col-md-2 eoms-form-col-left control-label">主题*</label>
+                  <div class="col-md-10 eoms-form-col-left">
+                    <input type="text" class="form-control" id="title" name="title" ng-model="vm.commontaskMain.title" placeholder="主题" required>
                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="commontaskNewForm.title.$dirty && commontaskNewForm.title.$valid"></span>
                     <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.title.$dirty && !commontaskNewForm.title.$valid"></span>
@@ -23,25 +23,25 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group">
-                  <label for="senduserid" class="col-md-4 control-label">操作人*</label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" id="senduserid" placeholder="操作人"></div>
+                  <label for="senduserid" class="col-md-4 eoms-form-col-left control-label">操作人*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" class="form-control" id="senduserid" name="senduserid" ng-model="vm.commontaskMain.senduserid" value="demo"></div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group">
-                  <label for="senddeptid" class="col-md-4 control-label">操作部门*</label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" id="senddeptid" placeholder="操作部门"></div>
+                  <label for="senddeptid" class="col-md-4 eoms-form-col-left control-label">操作部门*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" class="form-control" id="senddeptid" name="senddeptid" ng-model="vm.commontaskMain.senddeptid" value="101"></div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.sendcontact.$valid,'has-error':commontaskNewForm.sendcontact.$dirty&&!commontaskNewForm.sendcontact.$valid}">
-                  <label for="sendcontact" class="col-md-4 control-label">联系方式*</label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" id="sendcontact" name="sendcontact" ng-model="sendcontact" placeholder="操作人联系方式" required>
+                  <label for="sendcontact" class="col-md-4 eoms-form-col-left control-label">联系方式*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" class="form-control" id="sendcontact" name="sendcontact" ng-model="vm.commontaskMain.sendcontact" placeholder="操作人联系方式" required>
                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="commontaskNewForm.sendcontact.$dirty && commontaskNewForm.sendcontact.$valid"></span>
                     <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.sendcontact.$dirty && !commontaskNewForm.sendcontact.$valid"></span>
@@ -49,11 +49,11 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.sendtime.$valid,'has-error':commontaskNewForm.sendtime.$dirty&&!commontaskNewForm.sendtime.$valid}">
-                  <label for="sendtime" class="col-md-4 control-label">操作时间*</label>
-                  <div class="col-md-8">
-                    <input type="text" id="sendtime" name="sendtime" ng-model="sendtime"  class="form_datetime form-control" readonly required>
+                  <label for="sendtime" class="col-md-4 eoms-form-col-left control-label">操作时间*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" id="sendtime" name="sendtime" ng-model="vm.commontaskMain.sendtime"  class="form_datetime form-control" readonly required>
                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="commontaskNewForm.sendtime.$dirty && commontaskNewForm.sendtime.$valid"></span>
                     <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.sendtime.$dirty && !commontaskNewForm.sendtime.$valid"></span>
@@ -67,11 +67,11 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.sheetAcceptLimit.$valid,'has-error':commontaskNewForm.sheetAcceptLimit.$dirty&&!commontaskNewForm.sheetAcceptLimit.$valid}">
-                  <label for="sheetAcceptLimit" class="col-md-4 control-label">接收时限*</label>
-                  <div class="col-md-8">
-                    <input type="text" id="sheetAcceptLimit" name="sheetAcceptLimit" ng-model="sheetAcceptLimit"  class="form_datetime form-control" readonly required>
+                  <label for="sheetAcceptLimit" class="col-md-4 eoms-form-col-left control-label">接收时限*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" id="sheetAcceptLimit" name="sheetAcceptLimit" ng-model="vm.commontaskMain.sheetAcceptLimit"  class="form_datetime form-control" readonly required>
                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="commontaskNewForm.sheetAcceptLimit.$dirty && commontaskNewForm.sheetAcceptLimit.$valid"></span>
                     <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.sheetAcceptLimit.$dirty && !commontaskNewForm.sheetAcceptLimit.$valid"></span>
@@ -83,11 +83,11 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 eoms-form-col-left">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.sheetCompleteLimit.$valid,'has-error':commontaskNewForm.sheetCompleteLimit.$dirty&&!commontaskNewForm.sheetCompleteLimit.$valid}">
-                  <label for="sheetCompleteLimit" class="col-md-4 control-label">处理时限*</label>
-                  <div class="col-md-8">
-                    <input type="text" id="sheetCompleteLimit" name="sheetCompleteLimit" ng-model="sheetCompleteLimit"  class="form_datetime form-control" readonly required>
+                  <label for="sheetCompleteLimit" class="col-md-4 eoms-form-col-left control-label">处理时限*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" id="sheetCompleteLimit" name="sheetCompleteLimit" ng-model="vm.commontaskMain.sheetCompleteLimit"  class="form_datetime form-control" readonly required>
                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="commontaskNewForm.sheetCompleteLimit.$dirty && commontaskNewForm.sheetCompleteLimit.$valid"></span>
                     <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.sheetCompleteLimit.$dirty && !commontaskNewForm.sheetCompleteLimit.$valid"></span>
@@ -101,19 +101,194 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="mainnetsort1" class="col-md-4 control-label">网路一级分类*</label>
-                  <div class="col-md-8">
-                    <select class="form-control" name="mainnetsort1">
-                      <option value="无线">无线</option>
-                      <option value="网管">网管</option>
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainnetsort1.$valid,'has-error':commontaskNewForm.mainnetsort1.$dirty&&!commontaskNewForm.mainnetsort1.$valid}">
+                  <div>
+                  <!--init-dict-id: 字典id   sub:级联的下拉标签 id   title:类似于情选择 eoms-select:自定义级联字典值标签-->
+                    <select class="form-control eoms-select" id="mainnetsort1" init-dict-id="1010104" sub="mainnetsort2" name="mainnetsort1" title="网络一级分类"  ng-model="vm.commontaskMain.mainnetsort1" required  eoms-select>
+                      <option value="" >网络一级分类</option>
                     </select>
+                    <span ng-show="commontaskNewForm.mainnetsort1.$dirty && !commontaskNewForm.mainnetsort1.$valid" class="help-block">请选择</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainnetsort2.$valid,'has-error':commontaskNewForm.mainnetsort2.$dirty&&!commontaskNewForm.mainnetsort2.$valid}">
+                  <div>
+                    <select class="form-control eoms-select" id="mainnetsort2" name="mainnetsort2" ng-model="vm.commontaskMain.mainnetsort2" title="网络二级分类" sub="mainnetsort3" required  eoms-select>
+                      <option value="" >网络二级分类</option>
+                    </select>
+                    <span ng-show="commontaskNewForm.mainnetsort2.$dirty && !commontaskNewForm.mainnetsort2.$valid" class="help-block">请选择</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainnetsort3.$valid,'has-error':commontaskNewForm.mainnetsort3.$dirty&&!commontaskNewForm.mainnetsort3.$valid}">
+                  <div>
+                    <select class="form-control eoms-select" id="mainnetsort3" name="mainnetsort3" ng-model="vm.commontaskMain.mainnetsort3" title="网络三级分类" required  eoms-select>
+                      <option value="" >网络三级分类</option>
+                    </select>
+                    <span ng-show="commontaskNewForm.mainnetsort3.$dirty && !commontaskNewForm.mainnetsort3.$valid" class="help-block">请选择</span>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainTaskType.$valid,'has-error':commontaskNewForm.mainTaskType.$dirty&&!commontaskNewForm.mainTaskType.$valid}">
+                  <div>
+                    <select class="form-control eoms-select" id="mainTaskType" init-dict-id="1010102" name="mainTaskType" title="紧急程度"  ng-model="vm.commontaskMain.mainTaskType" required  eoms-select>
+                      <option value="" >紧急程度</option>
+                    </select>
+                    <span ng-show="commontaskNewForm.mainTaskType.$dirty && !commontaskNewForm.mainTaskType.$valid" class="help-block">请选择</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainTaskType2.$valid,'has-error':commontaskNewForm.mainTaskType2.$dirty&&!commontaskNewForm.mainTaskType2.$valid}">
+                  <div>
+                    <select class="form-control eoms-select" id="mainTaskType2" init-dict-id="1010402" name="mainTaskType2" title="任务类型"  ng-model="vm.commontaskMain.mainTaskType2" required  eoms-select>
+                      <option value="" >任务类型</option>
+                    </select>
+                    <span ng-show="commontaskNewForm.mainTaskType2.$dirty && !commontaskNewForm.mainTaskType2.$valid" class="help-block">请选择</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 eoms-form-col-left-right">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.ifComplaint.$valid,'has-error':commontaskNewForm.ifComplaint.$dirty&&!commontaskNewForm.ifComplaint.$valid}">
+                  <div>
+                    <select class="form-control eoms-select" id="ifComplaint" init-dict-id="10301" name="ifComplaint" title="是否关联投诉工单"  ng-model="vm.commontaskMain.ifComplaint" required  eoms-select>
+                      <option value="" >是否关联投诉工单</option>
+                    </select>
+                    <span ng-show="commontaskNewForm.ifComplaint.$dirty && !commontaskNewForm.ifComplaint.$valid" class="help-block">请选择</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 eoms-form-col-left">
+                <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.complaintId.$valid,'has-error':commontaskNewForm.complaintId.$dirty&&!commontaskNewForm.complaintId.$valid}">
+                  <label for="complaintId" class="col-md-4 eoms-form-col-left control-label">投诉工单sheetId*</label>
+                  <div class="col-md-8 eoms-form-col-left">
+                    <input type="text" class="form-control" id="complaintId" name="complaintId" ng-model="vm.commontaskMain.complaintId" required>
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-show="commontaskNewForm.complaintId.$dirty && commontaskNewForm.complaintId.$valid"></span>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="commontaskNewForm.complaintId.$dirty && !commontaskNewForm.complaintId.$valid"></span>
+                    <span ng-show="commontaskNewForm.complaintId.$dirty && !commontaskNewForm.complaintId.$valid" class="help-block">不能为空</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div >
+              <label for="tilte" class="control-label">任务描述*</label>
+            </div>
+            <div ng-class="{'has-success':commontaskNewForm.mainTaskDescription.$valid,'has-error':commontaskNewForm.mainTaskDescription.$dirty&&!commontaskNewForm.mainTaskDescription.$valid}">
+              <textarea id="mainTaskDescription" name="mainTaskDescription" ng-model="vm.commontaskMain.mainTaskDescription" class="form-control" rows="1" required></textarea>
+              <span ng-show="commontaskNewForm.mainTaskDescription.$dirty && !commontaskNewForm.mainTaskDescription.$valid" class="help-block">不能为空</span>
+            </div>
+            <div>
+              <label for="tilte" class="control-label">备注</label>
+            </div>
+            <div>
+              <textarea id="mainRemark" name="mainRemark" ng-model="vm.commontaskMain.mainRemark" class="form-control" rows="1"></textarea>
+            </div>
+            <br/>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <label class="btn btn-file eoms-file-btn">
+                  选择附件
+                  <input type="file" nv-file-select uploader="vm.uploader" multiple style="display: none;"></label>
+                <br/>
+                <div class="row">
+
+                  <div class="col-md-12" style="margin-bottom: 40px">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th width="50%">附件名称</th>
+                          <th ng-show="vm.uploader.isHTML5">大小</th>
+                          <th ng-show="vm.uploader.isHTML5">进度</th>
+                          <th>状态</th>
+                          <th>操作</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="item in vm.uploader.queue">
+                          <td> <strong>{{ item.file.name }}</strong>
+                          </td>
+                          <td ng-show="vm.uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                          <td ng-show="vm.uploader.isHTML5">
+                            <div class="progress" style="margin-bottom: 0;">
+                              <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                          </td>
+                          <td class="text-center">
+                            <span ng-show="item.isSuccess"> <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                            <span ng-show="item.isCancel"> <i class="glyphicon glyphicon-ban-circle"></i>
+                            </span>
+                            <span ng-show="item.isError">
+                              <i class="glyphicon glyphicon-remove"></i>
+                            </span>
+                          </td>
+                          <td nowrap>
+                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                              <span class="glyphicon glyphicon-upload"></span>
+                              上传
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                              <span class="glyphicon glyphicon-ban-circle"></span>
+                              取消
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                              <span class="glyphicon glyphicon-trash"></span>
+                              删除
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <div>
+                      <div>
+                        附件进度:
+                        <div class="progress" style="">
+                          <div class="progress-bar" role="progressbar" ng-style="{ 'width': vm.uploader.progress + '%' }"></div>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-success btn-s" ng-click="vm.uploader.uploadAll()" ng-disabled="!vm.uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span>
+                        全部上传
+                      </button>
+                      <button type="button" class="btn btn-warning btn-s" ng-click="vm.uploader.cancelAll()" ng-disabled="!vm.uploader.isUploading">
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                        全部取消
+                      </button>
+                      <button type="button" class="btn btn-danger btn-s" ng-click="vm.uploader.clearQueue()" ng-disabled="!vm.uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        全部删除
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              派发／审批／抄送
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-body" >
+              <!--eoms-chooser:派单树自定义指令 type(role,dept):-->
+                <label class="btn btn-file eoms-file-btn" title="标题" type="role" eoms-chooser>
+                  选择派发对象
+                </label>
+              </div>
+            </div>
             <button type="submit" ng-disabled="commontaskNewForm.$invalid" class="btn btn-primary">提交</button>
+            <button type="reset"  class="btn btn-primary">重置</button>
           </form>
         </div>
 

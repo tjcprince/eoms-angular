@@ -18,3 +18,5 @@ https://github.com/nickperkinslondon/angular-bootstrap-nav-tree
 用法是https://github.com/WQTeam/web-storage-cache/blob/master/README_zh_CN.md
 4.使用restangular进行访问服务器
 5.bootstrap-additions 应用于AngularStrap 的aside功能
+6.上传附件插件 angular-file-upload
+

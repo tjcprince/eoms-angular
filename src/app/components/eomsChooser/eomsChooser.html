@@ -1,0 +1,41 @@
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" style="width: 790px;">
+    <div class="modal-content">
+      <div class="modal-header" ng-show="title">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="modal-title" ng-bind-html="title"></h4>
+      </div>
+      <div class="modal-body" style="height: 420px;overflow: none;">
+        <div class="container-fluid">
+          <div class="row">
+            <div style="width: 340px;height: 370px;float: left;">
+              <!-- bsActivePane is optional -->
+              <div bs-active-pane="vm.unselectTabs.activeTab"  data-template="app/components/eomsChooser/angularStrap.tab.template.html" bs-tabs>
+                <div ng-repeat="tab in vm.unselectTabs" data-title="{{ tab.title }}" name="{{ tab.title }}" disabled="{{ tab.disabled }}" ng-include="tab.template" bs-pane></div>
+              </div>
+            </div>
+            <div style="width: 75px;float: left;padding-left:10px;padding-right: 10px">
+              <div style="display: table;height: 330px;width: 100%">
+                <div style="width: 100%;display: table-cell;vertical-align: middle;">
+                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">派发</button>
+                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">审批</button>
+                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">抄送</button>
+                </div>
+              </div>
+            </div>
+            <div style="width: 340px;height: 370px;float: left">
+              <div bs-active-pane="vm.selectTabs.activeTab1" data-template="app/components/eomsChooser/angularStrap.tab.template.html"  bs-tabs>
+                <div ng-repeat="tab in vm.selectTabs" data-title="{{ tab.title }}" name="{{ tab.title }}" disabled="{{ tab.disabled }}" ng-include="tab.template" bs-pane></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="$hide()">关闭</button>
+        <button type="button" class="btn btn-primary" ng-click="$hide()">保存</button>
+      </div>
+    </div>
+  </div>
+</div>

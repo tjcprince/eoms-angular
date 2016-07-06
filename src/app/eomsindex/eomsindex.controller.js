@@ -6,7 +6,7 @@
 		.controller('EomsindexController', EomsindexController);
 
 	/** @ngInject */
-	function EomsindexController(EomsindexService, $log, NgTableParams, $window, $websocket,toastr) {
+	function EomsindexController(EomsindexService, $log, NgTableParams, $window, $websocket,toastr,eomsIp) {
 		var vm = this;
 		var wsCache = new $window.WebStorageCache();
 		if (wsCache.get("indexdata") == null) {
@@ -28,7 +28,7 @@
 			});
 		}
 
-		var ws = $websocket('ws://localhost:8080/eoms2016/websck');
+		var ws = $websocket('ws://'+eomsIp+':8080/eoms2016/websck');
 		//var collection = [];
 
 		ws.onMessage(function(event) {

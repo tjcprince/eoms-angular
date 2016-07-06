@@ -1,0 +1,12 @@
+<div ivh-treeview="vm.roleTree" eoms-ivh-tree-control="vm.roleTreeControl">
+  <script type="text/ng-template">
+    <div title="{{trvw.label(node)}}">
+      <span ivh-treeview-toggle>
+        <span ivh-treeview-twistie></span>
+      </span>
+      <span ng-if="trvw.useCheckboxes()" ivh-treeview-checkbox></span>
+      <span class="ivh-treeview-node-label" ivh-treeview-eoms-select>{{trvw.label(node)}}</span>
+      <div ivh-treeview-children></div>
+    </div>
+  </script>
+</div>

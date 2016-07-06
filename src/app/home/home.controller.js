@@ -69,7 +69,6 @@
 
     //查询首页菜单--begin
     HomeService.queryMenu().then(function(data) {
-      console.info(data);
       vm.menuList = data;
       // vm.my_data = []; //初始化菜单树
     });

@@ -6,67 +6,84 @@
     .directive('eomsSelect', eomsSelect);
 
   /** @ngInject */
-  function eomsSelect(malarkey) {
+  function eomsSelect(EomsSelectService) {
     var directive = {
-      restrict: 'E',
+      restrict: 'AE',
+      require: 'ngModel',
       scope: {
-        extraValues: '='
+        initDictId: '='
       },
-      template: '&nbsp;',
-      link: linkFunc,
-      controller: MalarkeyController,
-      controllerAs: 'vm'
+      link: linkFunc
     };
 
     return directive;
 
-    function linkFunc(scope, el, attr, vm) {
-      var watcher;
-      var typist = malarkey(el[0], {
-        typeSpeed: 40,
-        deleteSpeed: 40,
-        pauseDelay: 800,
-        loop: true,
-        postfix: ' '
-      });
+    function linkFunc(scope, el, attr, ngModel) {
 
-      el.addClass('acme-malarkey');
-
-      angular.forEach(scope.extraValues, function(value) {
-        typist.type(value).pause().delete();
-      });
-
-      watcher = scope.$watch('vm.contributors', function() {
-        angular.forEach(vm.contributors, function(contributor) {
-          typist.type(contributor.login).pause().delete();
+      var dictid = attr.initDictId; //初始化的字典值id
+      EomsSelectService.queryDict(dictid).then(function(data) { //根据字典值id查询 子字典值
+        el.empty();//情况angular自带的空值
+        el.append("<option value=''>" + el.attr('title') + "</option>");
+        angular.forEach(data, function(obj) {
+          if (obj.DICTID == ngModel.$modelValue) { //要默认选中的字典值
+            el.append("<option value='" + obj.DICTID + "' selected>" + obj.DICTNAME + "</option>");
+            setSelect(ngModel.$modelValue, attr.sub); //设置级联 子列表默认选中
+          } else {
+            el.append("<option value='" + obj.DICTID + "'>" + obj.DICTNAME + "</option>");
+          }
         });
       });
 
-      scope.$on('$destroy', function () {
-        watcher();
-      });
-    }
+      var sub = attr.sub; //级联下拉 的子下拉列表的id
+      if (sub) {
+        el.bind('change', function() { //给当前下拉列表绑定事件
+          var selectVal = el.children('option:selected').val();
+          var subEl = angular.element("#" + sub);
+          clearEl(sub); //重置级联的子列表
+          //subEl.attr('disabled', false);
 
-    /** @ngInject */
-    function MalarkeyController($log, githubContributor) {
-      var vm = this;
-
-      vm.contributors = [];
-
-      activate();
-
-      function activate() {
-        return getContributors().then(function() {
-          $log.info('Activated Contributors View');
+          EomsSelectService.queryDict(selectVal).then(function(data) {
+            angular.forEach(data, function(obj) {
+              subEl.append("<option value='" + obj.DICTID + "'>" + obj.DICTNAME + "</option>");
+            });
+          });
         });
       }
 
-      function getContributors() {
-        return githubContributor.getContributors(10).then(function(data) {
-          vm.contributors = data;
+      // el.triggerHandler('change')
+    }
+    //设置默认选中
+    function setSelect(selectVal, sub) {
 
-          return vm.contributors;
+      var subEl = angular.element("#" + sub);
+      var ctrl = subEl.data('$ngModelController');
+      //subEl.attr('disabled', false);
+      subEl.empty();
+      subEl.append("<option value=''>" + subEl.attr('title') + "</option>");
+      EomsSelectService.queryDict(selectVal).then(function(data) {
+        angular.forEach(data, function(obj) {
+          if (obj.DICTID == ctrl.$modelValue) {
+            subEl.append("<option value='" + obj.DICTID + "' selected>" + obj.DICTNAME + "</option>");
+          } else {
+            subEl.append("<option value='" + obj.DICTID + "'>" + obj.DICTNAME + "</option>");
+          }
         });
+      });
+      if (subEl.attr('sub')) {
+        setSelect(ctrl.$modelValue, subEl.attr('sub'));
+      }
+    }
+
+    //重置子的下拉列表
+    function clearEl(sub) {
+      var subEl = angular.element("#" + sub);
+      var ctrl = subEl.data('$ngModelController');
+      ctrl.$valid = false;
+      // subEl.attr('disabled', true);
+      subEl.empty();
+      subEl.append("<option value=''>" + subEl.attr('title') + "</option>");
+      if (subEl.attr('sub')) {
+        clearEl(subEl.attr('sub'));
       }
     }
 
