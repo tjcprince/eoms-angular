@@ -17,9 +17,8 @@
             <div style="width: 75px;float: left;padding-left:10px;padding-right: 10px">
               <div style="display: table;height: 330px;width: 100%">
                 <div style="width: 100%;display: table-cell;vertical-align: middle;">
-                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">派发</button>
-                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">审批</button>
-                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode()">抄送</button>
+
+                  <button type="button" class="btn btn-primary btn-block" ng-click="vm.selectedNode(obj)" ng-repeat=" obj in vm.category">{{obj.text}}</button>
                 </div>
               </div>
             </div>

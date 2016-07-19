@@ -139,9 +139,9 @@
     expandedAttribute: '__ivhTreeviewExpanded',
     defaultSelectedState: false,
     validate: true,
-    twistieExpandedTpl: '<i class="fa fa-folder-open-o" aria-hidden="true"></i>',
-    twistieCollapsedTpl: '<i class="fa fa-folder-o" aria-hidden="true"></i>',
-    twistieLeafTpl: '<i class="fa fa-leaf" aria-hidden="true"></i>'
+    twistieExpandedTpl: '<i class="fa fa-minus" aria-hidden="true"></i>',
+    twistieCollapsedTpl: '<i class="fa fa-plus" aria-hidden="true"></i>',
+    twistieLeafTpl: '<i class="fa fa-plus" aria-hidden="true" style="opacity:0;"></i>'//设置为透明了，为了占位
   });
   }
 })();

@@ -1,9 +1,12 @@
+<!--eoms-ivh-tree-control 为了让ivh-treeview指令暴露数据选中的方法selectedNode-->
 <div ivh-treeview="vm.deptTree" eoms-ivh-tree-control="vm.deptTreeControl">
   <script type="text/ng-template">
     <div title="{{trvw.label(node)}}">
-      <span ivh-treeview-toggle>
+    <!-- urlClass 对应后台spring Controller的路径 urlMethod 对应后台spring  Controller类中的方法路径 -->
+      <span ivh-treeview-toggle urlClass="treeController" urlMethod="deptTree">
         <span ivh-treeview-twistie></span>
       </span>
+      <span ivh-treeview-eoms-icon></span><!--ivh-treeview-eoms-icon 指令 是 添加区分部门和用户的图标-->
       <span ng-if="trvw.useCheckboxes()" ivh-treeview-checkbox></span>
       <span class="ivh-treeview-node-label" ivh-treeview-eoms-select>{{trvw.label(node)}}</span>
       <div ivh-treeview-children></div>

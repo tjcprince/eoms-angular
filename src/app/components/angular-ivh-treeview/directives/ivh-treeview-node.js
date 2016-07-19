@@ -47,6 +47,9 @@ angular.module('ivh.treeview').directive('ivhTreeviewNode', ['ivhTreeviewCompile
             } else {
               element.addClass('ivh-treeview-node-leaf');
             }
+            if(node.leaf=='0'){
+              element.removeClass('ivh-treeview-node-leaf');
+            }
           });
         });
     }
