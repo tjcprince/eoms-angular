@@ -87,5 +87,8 @@
 			"title": "Title",
 			"content": "Hello Modal<br />This is a multiline message!"
 		};
+		vm.ceshi=function(){
+			EomsindexService.ceshi();
+		}
 	}
 })();

@@ -1,125 +1,129 @@
-
-/**
- * Global options for ivhTreeview
- *
- * @package ivh.treeview
- * @copyright 2014 iVantage Health Analytics, Inc.
- */
-
-angular.module('ivh.treeview').provider('ivhTreeviewOptions', function() {
-  'use strict';
-
-  var options = {
+(function() {
+    'use strict';
     /**
-     * ID attribute
+     * Global options for ivhTreeview
      *
-     * For selecting nodes by identifier rather than reference
+     * @package ivh.treeview
+     * @copyright 2014 iVantage Health Analytics, Inc.
      */
-    idAttribute: 'id',
 
-    /**
-     * Collection item attribute to use for labels
-     */
-    labelAttribute: 'label',
+    angular.module('ivh.treeview').provider('ivhTreeviewOptions', ivhTreeviewOptions);
 
-    /**
-     * Collection item attribute to use for child nodes
-     */
-    childrenAttribute: 'children',
+    function ivhTreeviewOptions() {
+        'use strict';
 
-    /**
-     * Collection item attribute to use for selected state
-     */
-    selectedAttribute: 'selected',
+        var options = {
+            /**
+             * ID attribute
+             *
+             * For selecting nodes by identifier rather than reference
+             */
+            idAttribute: 'id',
 
-    /**
-     * Controls whether branches are initially expanded or collapsed
-     *
-     * A value of `0` means the tree will be entirely collapsd (the default
-     * state) otherwise branches will be expanded up to the specified depth. Use
-     * `-1` to have the tree entirely expanded.
-     */
-    expandToDepth: 0,
+            /**
+             * Collection item attribute to use for labels
+             */
+            labelAttribute: 'label',
 
-    /**
-     * Whether or not to use checkboxes
-     *
-     * If `false` the markup to support checkboxes is not included in the
-     * directive.
-     */
-    useCheckboxes: true,
+            /**
+             * Collection item attribute to use for child nodes
+             */
+            childrenAttribute: 'children',
 
-    /**
-     * Whether or not directive should validate treestore on startup
-     */
-    validate: true,
+            /**
+             * Collection item attribute to use for selected state
+             */
+            selectedAttribute: 'selected',
 
-    /**
-     * Collection item attribute to track intermediate states
-     */
-    indeterminateAttribute: '__ivhTreeviewIndeterminate',
+            /**
+             * Controls whether branches are initially expanded or collapsed
+             *
+             * A value of `0` means the tree will be entirely collapsd (the default
+             * state) otherwise branches will be expanded up to the specified depth. Use
+             * `-1` to have the tree entirely expanded.
+             */
+            expandToDepth: 0,
 
-    /**
-     * Collection item attribute to track expanded status
-     */
-    expandedAttribute: '__ivhTreeviewExpanded',
+            /**
+             * Whether or not to use checkboxes
+             *
+             * If `false` the markup to support checkboxes is not included in the
+             * directive.
+             */
+            useCheckboxes: true,
 
-    /**
-     * Default selected state when validating
-     */
-    defaultSelectedState: true,
+            /**
+             * Whether or not directive should validate treestore on startup
+             */
+            validate: true,
 
-    /**
-     * Template for expanded twisties
-     */
-    twistieExpandedTpl: '(-)',
+            /**
+             * Collection item attribute to track intermediate states
+             */
+            indeterminateAttribute: '__ivhTreeviewIndeterminate',
 
-    /**
-     * Template for collapsed twisties
-     */
-    twistieCollapsedTpl: '(+)',
+            /**
+             * Collection item attribute to track expanded status
+             */
+            expandedAttribute: '__ivhTreeviewExpanded',
 
-    /**
-     * Template for leaf twisties (i.e. no children)
-     */
-    twistieLeafTpl: 'o',
+            /**
+             * Default selected state when validating
+             */
+            defaultSelectedState: true,
 
-    /**
-     * Template for tree nodes
-     */
-    nodeTpl: [
-      '<div class="ivh-treeview-node-content" title="{{trvw.label(node)}}">',
-        '<span ivh-treeview-toggle>',
-          '<span class="ivh-treeview-twistie-wrapper" ivh-treeview-twistie></span>',
-        '</span>',
-        '<span class="ivh-treeview-checkbox-wrapper" ng-if="trvw.useCheckboxes()"',
-            'ivh-treeview-checkbox>',
-        '</span>',
-        '<span class="ivh-treeview-node-label" ivh-treeview-toggle>',
-          '{{trvw.label(node)}}',
-        '</span>',
-        '<div ivh-treeview-children></div>',
-      '</div>'
-    ].join('\n')
-  };
+            /**
+             * Template for expanded twisties
+             */
+            twistieExpandedTpl: '(-)',
 
-  /**
-   * Update global options
-   *
-   * @param {Object} opts options object to override defaults with
-   */
-  this.set = function(opts) {
-    angular.extend(options, opts);
-  };
+            /**
+             * Template for collapsed twisties
+             */
+            twistieCollapsedTpl: '(+)',
 
-  this.$get = function() {
-    /**
-     * Get a copy of the global options
-     *
-     * @return {Object} The options object
-     */
-    return function() {
-      return angular.copy(options);
-    };
-  };
-});
+            /**
+             * Template for leaf twisties (i.e. no children)
+             */
+            twistieLeafTpl: 'o',
+
+            /**
+             * Template for tree nodes
+             */
+            nodeTpl: [
+                '<div class="ivh-treeview-node-content" title="{{trvw.label(node)}}">',
+                '<span ivh-treeview-toggle>',
+                '<span class="ivh-treeview-twistie-wrapper" ivh-treeview-twistie></span>',
+                '</span>',
+                '<span class="ivh-treeview-checkbox-wrapper" ng-if="trvw.useCheckboxes()"',
+                'ivh-treeview-checkbox>',
+                '</span>',
+                '<span class="ivh-treeview-node-label" ivh-treeview-toggle>',
+                '{{trvw.label(node)}}',
+                '</span>',
+                '<div ivh-treeview-children></div>',
+                '</div>'
+            ].join('\n')
+        };
+
+        /**
+         * Update global options
+         *
+         * @param {Object} opts options object to override defaults with
+         */
+        this.set = function(opts) {
+            angular.extend(options, opts);
+        };
+
+        this.$get = function() {
+            /**
+             * Get a copy of the global options
+             *
+             * @return {Object} The options object
+             */
+            return function() {
+                return angular.copy(options);
+            };
+        };
+    }
+})();

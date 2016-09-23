@@ -93,7 +93,7 @@
     RestangularProvider.addResponseInterceptor(function(data, operation) {
       var extractedData;
       if (operation === "getList") {
-        extractedData = data.entity;
+        extractedData = data.entity;//后台必须返回json也就是new ArrayList()
         extractedData.status = data.status;
       } else {
         extractedData = data;

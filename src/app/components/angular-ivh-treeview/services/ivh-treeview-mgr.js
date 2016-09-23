@@ -1,21 +1,24 @@
-
-/**
- * Manager for treeview data stores
- *
- * Used to assist treeview operations, e.g. selecting or validating a tree-like
- * collection.
- *
- * @package ivh.treeview
- * @copyright 2014 iVantage Health Analytics, Inc.
- */
-
-angular.module('ivh.treeview')
-  .factory('ivhTreeviewMgr', ['ivhTreeviewOptions', 'ivhTreeviewBfs', function(ivhTreeviewOptions, ivhTreeviewBfs) {
+(function() {
+  'use strict';
+  /**
+   * Manager for treeview data stores
+   *
+   * Used to assist treeview operations, e.g. selecting or validating a tree-like
+   * collection.
+   *
+   * @package ivh.treeview
+   * @copyright 2014 iVantage Health Analytics, Inc.
+   */
+/*eslint-disable no-unused-vars*/
+  angular.module('ivh.treeview')
+    .factory('ivhTreeviewMgr', ivhTreeviewMgr);
+  /** @ngInject */
+  function ivhTreeviewMgr(ivhTreeviewOptions, ivhTreeviewBfs) {
     'use strict';
 
-    var ng = angular
-      , options = ivhTreeviewOptions()
-      , exports = {};
+    var ng = angular,
+      options = ivhTreeviewOptions(),
+      exports = {};
 
     // The make* methods and validateParent need to be bound to an options
     // object
@@ -30,25 +33,25 @@ angular.module('ivh.treeview')
     };
 
     var validateParent = function(node) {
-      var children = node[this.childrenAttribute]
-        , selectedAttr = this.selectedAttribute
-        , indeterminateAttr = this.indeterminateAttribute
-        , numSelected = 0
-        , numIndeterminate = 0;
+      var children = node[this.childrenAttribute],
+        selectedAttr = this.selectedAttribute,
+        indeterminateAttr = this.indeterminateAttribute,
+        numSelected = 0,
+        numIndeterminate = 0;
       ng.forEach(children, function(n, ix) {
-        if(n[selectedAttr]) {
+        if (n[selectedAttr]) {
           numSelected++;
         } else {
-          if(n[indeterminateAttr]) {
+          if (n[indeterminateAttr]) {
             numIndeterminate++;
           }
         }
       });
 
-      if(0 === numSelected && 0 === numIndeterminate) {
+      if (0 === numSelected && 0 === numIndeterminate) {
         node[selectedAttr] = false;
         node[indeterminateAttr] = false;
-      } else if(numSelected === children.length) {
+      } else if (numSelected === children.length) {
         node[selectedAttr] = true;
         node[indeterminateAttr] = false;
       } else {
@@ -58,20 +61,20 @@ angular.module('ivh.treeview')
     };
 
     var findNode = function(tree, node, opts, cb) {
-      var useId = isId(node)
-        , proceed = true
-        , idAttr = opts.idAttribute;
+      var useId = isId(node),
+        proceed = true,
+        idAttr = opts.idAttribute;
 
       // Our return values
-      var foundNode = null
-        , foundParents = [];
+      var foundNode = null,
+        foundParents = [];
 
       ivhTreeviewBfs(tree, opts, function(n, p) {
         var isNode = proceed && (useId ?
           node === n[idAttr] :
           node === n);
 
-        if(isNode) {
+        if (isNode) {
           // I've been looking for you all my life
           proceed = false;
           foundNode = n;
@@ -103,8 +106,8 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.select = function(tree, node, opts, isSelected) {
-      if(arguments.length > 2) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 2) {
+        if (typeof opts === 'boolean') {
           isSelected = opts;
           opts = {};
         }
@@ -112,16 +115,16 @@ angular.module('ivh.treeview')
       opts = ng.extend({}, options, opts);
       isSelected = ng.isDefined(isSelected) ? isSelected : true;
 
-      var useId = isId(node)
-        , proceed = true
-        , idAttr = opts.idAttribute;
+      var useId = isId(node),
+        proceed = true,
+        idAttr = opts.idAttribute;
 
       ivhTreeviewBfs(tree, opts, function(n, p) {
         var isNode = proceed && (useId ?
           node === n[idAttr] :
           node === n);
 
-        if(isNode) {
+        if (isNode) {
           // I've been looking for you all my life
           proceed = false;
 
@@ -150,8 +153,8 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.selectAll = function(tree, opts, isSelected) {
-      if(arguments.length > 1) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 1) {
+        if (typeof opts === 'boolean') {
           isSelected = opts;
           opts = {};
         }
@@ -160,8 +163,8 @@ angular.module('ivh.treeview')
       opts = ng.extend({}, options, opts);
       isSelected = ng.isDefined(isSelected) ? isSelected : true;
 
-      var selectedAttr = opts.selectedAttribute
-        , indeterminateAttr = opts.indeterminateAttribute;
+      var selectedAttr = opts.selectedAttribute,
+        indeterminateAttr = opts.indeterminateAttribute;
 
       ivhTreeviewBfs(tree, opts, function(node) {
         node[selectedAttr] = isSelected;
@@ -252,13 +255,13 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.validate = function(tree, opts, bias) {
-      if(!tree) {
+      if (!tree) {
         // Guard against uninitialized trees
         return exports;
       }
 
-      if(arguments.length > 1) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 1) {
+        if (typeof opts === 'boolean') {
           bias = opts;
           opts = {};
         }
@@ -266,11 +269,11 @@ angular.module('ivh.treeview')
       opts = ng.extend({}, options, opts);
       bias = ng.isDefined(bias) ? bias : opts.defaultSelectedState;
 
-      var selectedAttr = opts.selectedAttribute
-        , indeterminateAttr = opts.indeterminateAttribute;
+      var selectedAttr = opts.selectedAttribute,
+        indeterminateAttr = opts.indeterminateAttribute;
 
       ivhTreeviewBfs(tree, opts, function(node, parents) {
-        if(ng.isDefined(node[selectedAttr]) && node[selectedAttr] !== bias) {
+        if (ng.isDefined(node[selectedAttr]) && node[selectedAttr] !== bias) {
           exports.select(tree, node, opts, !bias);
           return false;
         } else {
@@ -296,8 +299,8 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.expand = function(tree, node, opts, isExpanded) {
-      if(arguments.length > 2) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 2) {
+        if (typeof opts === 'boolean') {
           isExpanded = opts;
           opts = {};
         }
@@ -305,10 +308,10 @@ angular.module('ivh.treeview')
       opts = ng.extend({}, options, opts);
       isExpanded = ng.isDefined(isExpanded) ? isExpanded : true;
 
-      var useId = isId(node)
-        , expandedAttr = opts.expandedAttribute;
+      var useId = isId(node),
+        expandedAttr = opts.expandedAttribute;
 
-      if(!useId) {
+      if (!useId) {
         // No need to do any searching if we already have the node in hand
         node[expandedAttr] = isExpanded;
         return exports;
@@ -337,8 +340,8 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.expandRecursive = function(tree, node, opts, isExpanded) {
-      if(arguments.length > 2) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 2) {
+        if (typeof opts === 'boolean') {
           isExpanded = opts;
           opts = {};
         }
@@ -347,12 +350,12 @@ angular.module('ivh.treeview')
       opts = ng.extend({}, options, opts);
       isExpanded = ng.isDefined(isExpanded) ? isExpanded : true;
 
-      var useId = isId(node)
-        , expandedAttr = opts.expandedAttribute
-        , branch;
+      var useId = isId(node),
+        expandedAttr = opts.expandedAttribute,
+        branch;
 
       // If we have an ID first resolve it to an actual node in the tree
-      if(useId) {
+      if (useId) {
         findNode(tree, node, opts, function(n, p) {
           branch = n;
         });
@@ -360,7 +363,7 @@ angular.module('ivh.treeview')
         branch = node;
       }
 
-      if(branch) {
+      if (branch) {
         ivhTreeviewBfs(branch, opts, function(n, p) {
           n[expandedAttr] = isExpanded;
         });
@@ -407,8 +410,8 @@ angular.module('ivh.treeview')
      * @return {Object} Returns the ivhTreeviewMgr instance for chaining
      */
     exports.expandTo = function(tree, node, opts, isExpanded) {
-      if(arguments.length > 2) {
-        if(typeof opts === 'boolean') {
+      if (arguments.length > 2) {
+        if (typeof opts === 'boolean') {
           isExpanded = opts;
           opts = {};
         }
@@ -446,4 +449,5 @@ angular.module('ivh.treeview')
 
     return exports;
   }
-]);
+
+})();

@@ -1,4 +1,3 @@
-
 /**
  * Wrapper for a checkbox directive
  *
@@ -9,12 +8,16 @@
  * @package ivh.treeview
  * @copyright 2014 iVantage Health Analytics, Inc.
  */
+(function() {
+	'use strict';
+	angular.module('ivh.treeview').directive('ivhTreeviewCheckbox', ivhTreeviewCheckbox);
 
-angular.module('ivh.treeview').directive('ivhTreeviewCheckbox', [function() {
-  'use strict';
-  return {
-    restrict: 'AE',
-    require: '^ivhTreeview',
-    template: '<span ivh-treeview-checkbox-helper="node"></span>'
-  };
-}]);
+	function ivhTreeviewCheckbox() {
+		'use strict';
+		return {
+			restrict: 'AE',
+			require: '^ivhTreeview',
+			template: '<span ivh-treeview-checkbox-helper="node"></span>'
+		};
+	}
+})();

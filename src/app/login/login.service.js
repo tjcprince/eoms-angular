@@ -6,16 +6,16 @@
 		.service('LoginService', LoginService);
 
 	/** @ngInject*/
-	function LoginService($http, $log) {
+	function LoginService($http, $log, Restangular) {
 
 		var service = {
-			getLogin: getLogin
+			getLogin: getLogin,
+			loginEoms: loginEoms//模拟登陆EOMS系统
 		};
 
 		return service;
 
-		function getLogin(userInfo) {
-			$log.info(userInfo);
+		function getLogin() {
 			return $http.get('app/data/login.json').then(getLoginComplete)
 				.catch(getLoginFailed);
 
@@ -26,6 +26,13 @@
 			function getLoginFailed(error) {
 				$log.error('XHR Failed for getAvengers.' + error.data);
 			}
+		}
+
+		function loginEoms(user) {
+			return Restangular.one('auth').getList("loginEoms",{
+				username: user.userid,
+				password:user.password
+			});
 		}
 
 	}

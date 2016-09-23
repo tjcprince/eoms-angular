@@ -21,16 +21,10 @@
 				leaf: '0',
 				id: '-1'
 			}]
-		}, {
-			treeName: 'roleTree', //对应 ivh-treeview 模版树ivh-treeview="vm.deptTree" 
-			treeControlName: 'roleTreeControl', //对应 ivh-treeview 模版树eoms-ivh-tree-control="vm.eomsIvhTreeControl"
-			title: '可选子角色', //对应 angularStrap的tab指令的 title
-			template: "app/components/eomsChooser/role.template.html", //对应 angularStrap的tab指令的 template
-			treedata: [{
-				label: '可选子角色',
-				children: []
-			}]
 		}];
+		if(!angular.isUndefined($scope.tabs)){
+			tabs=$scope.tabs;
+		}
 
 		//遍历派单树指令传入的值
 		angular.forEach(tabs, function(value) {
@@ -70,6 +64,9 @@
 				vtext: '请选择任务抄送人',
 				allowBlank: false
 			}]
+			 if(!angular.isUndefined($scope.category)){
+			 	vm.category=$scope.category;
+			 }
 			//右边已选择项目动态创建
 		angular.forEach(vm.category, function(value) {
 			//右边初始化树图的数据
@@ -129,8 +126,43 @@
 			template: "app/components/eomsChooser/selectTree.template.html"
 		}];
 
+		var selectData=$scope.selectChooserdata;//右边的树图已经添加的数据
+		if(selectData){
+			angular.forEach(selectData, function(value){
+				vm[value.treeName][0].children=value.children;
+			});
+		}
+
+		//保存派单树
 		vm.save = function() {
-			
+			var selectdata=[];//此数据为记录最后一次操作派单树的数据
+			var data=[];//此数据为新建工单页面显示的数据
+			angular.forEach(vm.category, function(value){
+				var child=[];
+				angular.forEach(vm[value.id + 'TreeData'][0].children, function(val){
+					var o={
+						id:val.id,
+						label:val.label
+					}
+					child.push(o);
+				});
+				var obj={
+					name:value.text,
+					treeName:value.id + 'TreeData',//树图数据名
+					children:child
+				}
+				data.push(obj);//此数据为新建工单页面显示的数据
+
+				//此数据为记录最后一次操作派单树的数据
+				var selectobj={
+					name:value.text,
+					treeName:value.id + 'TreeData',//树图数据名
+					children:vm[value.id + 'TreeData'][0].children
+				}
+				selectdata.push(selectobj)//此数据为记录最后一次操作派单树的数据
+			});
+			vm.selectChooserdata=selectdata;//此数据为记录最后一次操作派单树的数据
+			vm.chooserdata=data;//此数据为新建工单页面显示的数据
 		}
 	}
 })();

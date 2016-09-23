@@ -1,16 +1,21 @@
-angular.module('ivh.treeview').factory('ivhTreeviewEomsTreedata', ['Restangular', function(Restangular) {
+(function() {
 	'use strict';
+	angular.module('ivh.treeview').factory('ivhTreeviewEomsTreedata', ivhTreeviewEomsTreedata);
+	/** @ngInject */
+	function ivhTreeviewEomsTreedata(Restangular) {
+		'use strict';
 
-	var service = {
-		queryTree: queryTree
-	};
+		var service = {
+			queryTree: queryTree
+		};
 
-	return service;
+		return service;
 
-	function queryTree(urlClass, urlMethod, id) {
+		function queryTree(urlClass, urlMethod, id) {
 
-		return Restangular.one(urlClass).getList(urlMethod, {
-			id: id
-		});
+			return Restangular.one(urlClass).getList(urlMethod, {
+				id: id
+			});
+		}
 	}
-}]);
+})();

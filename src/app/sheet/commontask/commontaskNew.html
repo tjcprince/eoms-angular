@@ -104,7 +104,7 @@
               <div class="col-md-3 eoms-form-col-left-right">
                 <div class="form-group has-feedback" ng-class="{'has-success':commontaskNewForm.mainnetsort1.$valid,'has-error':commontaskNewForm.mainnetsort1.$dirty&&!commontaskNewForm.mainnetsort1.$valid}">
                   <div>
-                  <!--init-dict-id: 字典id   sub:级联的下拉标签 id   title:类似于情选择 eoms-select:自定义级联字典值标签-->
+                    <!--init-dict-id: 字典id   sub:级联的下拉标签 id   title:类似于情选择 eoms-select:自定义级联字典值标签-->
                     <select class="form-control eoms-select" id="mainnetsort1" init-dict-id="1010104" sub="mainnetsort2" name="mainnetsort1" title="网络一级分类"  ng-model="vm.commontaskMain.mainnetsort1" required  eoms-select>
                       <option value="" >网络一级分类</option>
                     </select>
@@ -195,12 +195,18 @@
               <textarea id="mainRemark" name="mainRemark" ng-model="vm.commontaskMain.mainRemark" class="form-control" rows="1"></textarea>
             </div>
             <br/>
+            <div>
+              <label for="tilte" class="control-label">附件</label>
+            </div>
             <div class="panel panel-default">
               <div class="panel-body">
-                <label class="btn btn-file eoms-file-btn">
+                <div class="row">
+                  <div class="col-md-12 text-right">
+                     <label class="btn btn-file eoms-file-btn">
                   选择附件
                   <input type="file" nv-file-select uploader="vm.uploader" multiple style="display: none;"></label>
-                <br/>
+                  </div>
+                </div>
                 <div class="row">
 
                   <div class="col-md-12" style="margin-bottom: 40px">
@@ -276,15 +282,22 @@
                 </div>
               </div>
             </div>
-            <div>
-              派发／审批／抄送
-            </div>
+            <div>派发／审批／抄送</div>
             <div class="panel panel-default">
               <div class="panel-body" >
-              <!--eoms-chooser:派单树自定义指令 type(role,dept):-->
-                <label class="btn btn-file eoms-file-btn" title="标题" type="role" eoms-chooser>
-                  选择派发对象
-                </label>
+                <div class="row">
+                  <div class="col-md-10">
+                    <div ng-repeat="obj in vm.chooserdata">
+                      <span class="text-primary">{{obj.name}}:</span>
+                      <span ng-repeat="child in obj.children">{{child.label}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                  </div>
+                  <div class="col-md-2 text-right">
+                     <!--eoms-chooser:派单树自定义指令 type(role,dept):-->
+                    <label class="btn btn-file eoms-file-btn" chooserdata="vm.chooserdata" title="标题" tabs="[{treeName: 'deptTree',treeControlName: 'deptTreeControl', title: '部门与人员',template: 'app/components/eomsChooser/dept.template.html',treedata: [{label: '部门与人员',leaf: '0',id: '-1'}]}, {treeName: 'roleTree',treeControlName: 'roleTreeControl',title: '可选子角色', template: 'app/components/eomsChooser/role.template.html',treedata: [{label: '可选子角色',children: []}]}]" category='[{"id":"dealPerformer","childType":"user,dept","childTypeText":"派发(只能选择用户或者部门)","text":"派发","limit":"none","vtext":"请选择任务执行人","allowBlank":false},{"id":"auditPerformer","childType":"user","childTypeText":"审批(只能选择用户)","text":"审批","limit":"none","vtext":"请选择任务审批人","allowBlank":false},{"id":"copyPerformer","childType":"user,dept","childTypeText":"抄送(只能选择用户或者部门)","text":"抄送","limit":"none","vtext":"请选择任务抄送人","allowBlank":false}]' eoms-chooser>选择对象</label>
+                  </div>
+                </div>
+
               </div>
             </div>
             <button type="submit" ng-disabled="commontaskNewForm.$invalid" class="btn btn-primary">提交</button>

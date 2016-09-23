@@ -5,85 +5,20 @@
 		.module('eomsAngular')
 		.controller('CommontaskListController', CommontaskListController);
 	/** @ngInject */
-	function CommontaskListController($scope, $log, FileUploader, SatellizerConfig, SatellizerStorage) {
+	function CommontaskListController($modal) {
 		var vm = this;
-		//angularstrap 的modal，监听关闭前
-		$scope.$on('modal.hide.before', function(e, target) {
-				$log.info("隐藏前");
-			})
-			//angularstrap 的modal，监听关闭
-		$scope.$on('modal.hide', function(e, target) {
-				$log.info("隐藏");
-				vm.commontaskMain = {
-					mainnetsort1: '101010401',
-					mainnetsort2: '10101040101',
-					mainnetsort3: '1010104010103'
-				}
-			})
-			//弹出层的初始值
-		vm.commontaskMain = {
-				mainnetsort1: '101010401',
-				mainnetsort2: '10101040101',
-				mainnetsort3: '1010104010103'
-			}
-			//设置上传附件的请求headers上添加token信息
-		var tokenName = SatellizerConfig.tokenPrefix ? SatellizerConfig.tokenPrefix + '_' + SatellizerConfig.tokenName : SatellizerConfig.tokenName;
-		var token = SatellizerStorage.get(tokenName);
-		vm.authHeader = SatellizerConfig.authHeader;
-		vm.token1 = SatellizerConfig.authToken + ' ' + token
-		vm.uploader = new FileUploader({
-			url: 'http://localhost:8080/eoms2016/FileUploadController/filesUpload',
-			headers: {
-				'Authorization': vm.token1
-			}
+
+		var newSheetModal = $modal({
+			controller: 'CommontaskNewController',
+			controllerAs: 'vm',
+			title: '新建工单',
+			templateUrl: 'app/sheet/commontask/commontaskNew.html',
+			show: false,
+			animation: 'am-fade-and-slide-top'
 		});
+		vm.newSheet = function() {
+			newSheetModal.$promise.then(newSheetModal.show);
+		}
 
-		// FILTERS
-
-		vm.uploader.filters.push({
-			name: 'customFilter',
-			fn: function(item /*{File|FileLikeObject}*/ , options) {
-				return this.queue.length < 10;
-			}
-		});
-
-		// CALLBACKS
-
-		vm.uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/ , filter, options) {
-			$log.info('onWhenAddingFileFailed', item, filter, options);
-		};
-		vm.uploader.onAfterAddingFile = function(fileItem) {
-			$log.info('onAfterAddingFile', fileItem);
-		};
-		vm.uploader.onAfterAddingAll = function(addedFileItems) {
-			$log.info('onAfterAddingAll', addedFileItems);
-		};
-		vm.uploader.onBeforeUploadItem = function(item) {
-			$log.info('onBeforeUploadItem', item);
-		};
-		vm.uploader.onProgressItem = function(fileItem, progress) {
-			$log.info('onProgressItem', fileItem, progress);
-		};
-		vm.uploader.onProgressAll = function(progress) {
-			$log.info('onProgressAll', progress);
-		};
-		vm.uploader.onSuccessItem = function(fileItem, response, status, headers) {
-			$log.info('onSuccessItem', fileItem, response, status, headers);
-		};
-		vm.uploader.onErrorItem = function(fileItem, response, status, headers) {
-			$log.info('onErrorItem', fileItem, response, status, headers);
-		};
-		vm.uploader.onCancelItem = function(fileItem, response, status, headers) {
-			$log.info('onCancelItem', fileItem, response, status, headers);
-		};
-		vm.uploader.onCompleteItem = function(fileItem, response, status, headers) {
-			$log.info('onCompleteItem', fileItem, response, status, headers);
-		};
-		vm.uploader.onCompleteAll = function() {
-			$log.info('onCompleteAll');
-		};
-
-		$log.info('vm.uploader', vm.uploader);
-		
 	}
 })();
