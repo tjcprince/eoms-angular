@@ -81,6 +81,7 @@
     // RestangularProvider.setDefaultRequestParams('jsonp', {
     //   callback: 'JSON_CALLBACK'
     // });
+    RestangularProvider.setDefaultHeaders({token: "x-restangular"});
     RestangularProvider.setDefaultHeaders({
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     });
@@ -89,7 +90,16 @@
     //         'Access-Control-Allow-Origin':'*',
     //         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
     //     });
-
+    
+    RestangularProvider.setDefaultHttpFields({cache: true})
+    RestangularProvider.setFullRequestInterceptor(function (element, operation, route, url, headers, params, httpConfig) {
+      return {
+        element: element,
+        params: params,
+        headers: headers,
+        httpConfig: _.extend(httpConfig, {skipAuthorization: false})
+      };
+    });
     RestangularProvider.addResponseInterceptor(function(data, operation) {
       var extractedData;
       if (operation === "getList") {
